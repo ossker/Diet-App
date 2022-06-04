@@ -1,0 +1,447 @@
+﻿<Page
+    x:Class="dietApp.kalkulatorKalorii"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:dietApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+
+    >
+    
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+
+        </Grid.RowDefinitions>
+
+        <!-- Górny napis -->
+        <Border Grid.Row="0" BorderBrush="#FFFFC700" CornerRadius="0,0,10,10" BorderThickness="2,2,2,2">
+            
+            <StackPanel Background="#FFFFD662">
+                
+                <TextBlock Text="Fit &amp; You" Foreground="white" Style="{ThemeResource HeaderTextBlockStyle}" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FocusVisualPrimaryBrush="White" />
+            </StackPanel>
+        </Border>
+
+        
+        <!-- Content -->
+        <ScrollViewer Grid.Row="1" ZoomMode="Enabled" MaxZoomFactor="2" MinZoomFactor="1" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible">
+            <StackPanel>
+
+                <!-- Niebieski stack z nazwa strony -->
+                <Border BorderBrush="#FF55BAC7" Width="480" CornerRadius="20,20,20,20" BorderThickness="3,3,3,3" Margin="10,10,10,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Background="#FF99D5E0">
+                        <Image Width="70" Height="70" Source="ms-appx:///Assets/caloriesIcon.png" HorizontalAlignment="Left" Margin="40,5,30,5"></Image>
+                        <StackPanel Margin="30,5,30,5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">KALKULATOR KALORII</TextBlock>
+                            
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- ...................................................................................... -->
+                
+                <!-- Wpisz dane potrzebne do obliczeń -->
+                <Border x:Name="borderDane" Visibility="Visible" CornerRadius="20,20,20,20" Width="480" BorderBrush="Black" BorderThickness="3,3,3,3" Background="#FFF9F9F9" Margin="30,10,30,10" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel>
+
+                        <!-- Nagłówek -->
+                        <Border Background="#FF2A96BB" CornerRadius="10,10,5,5" Padding="10,10,10,10" BorderThickness="0,0,0,2" BorderBrush="Black" Margin="0,0,0,5">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">
+                                    Wpisz dane potrzebne do obliczeń
+                            </TextBlock>
+                        </Border>
+
+                        <!-- Formularz -->
+                        <Border Background="#FFF9F9F9" CornerRadius="10,10,15,15" Padding="10,10,10,10" BorderThickness="0,0,0,3" BorderBrush="Black" Margin="0,0,0,5">
+                            <StackPanel>
+                                <!-- Stack z płcią -->
+                                <StackPanel Orientation="Horizontal" Visibility="Visible" VerticalAlignment="center" HorizontalAlignment="center" Margin="0,10,0,10">
+                                    <TextBlock FontWeight="Medium" FontSize="15" VerticalAlignment="Center" Margin="0,20,40,20">Wybierz płeć:</TextBlock>
+                                    <ComboBox x:Name="cbPlec" AllowDrop="True" FontWeight="Medium" BorderBrush="#FF248CCE" Background="#FFEAEAEA" PlaceholderText="Płeć" CornerRadius="10,10,10,10" VerticalAlignment="Center" FocusVisualPrimaryBrush="Black" Foreground="Black" Width="120" Height="35">
+                                        <ComboBoxItem Tag="K" Content="Kobieta"/>
+                                        <ComboBoxItem Tag="M" Content="Mężczyzna"/>
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <!-- Przerywnik -->
+                                <StackPanel Height="1" Background="Black" Margin="60,10,60,20"/>
+
+                                <!-- Stack z wagą i wzrostem -->
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,15,0,10">
+                                    <TextBox x:Name="tbWiek" TextChanged="tbWiek_TextChanged" FontWeight="Medium" TextAlignment="Right"  BorderBrush="#FF248CCE" Background="#FFEAEAEA" CornerRadius="10,10,10,10" Width="100" Height="35" Margin="0,0,10,0" Padding="0,6,10,0"></TextBox>
+                                    <TextBox x:Name="tbWaga" TextChanged="tbWaga_TextChanged" FontWeight="Medium" TextAlignment="Right" PlaceholderText="kg" BorderBrush="#FF248CCE" Background="#FFEAEAEA" CornerRadius="10,10,10,10" Width="100" Height="35" Margin="0,0,10,0" Padding="0,6,10,0"></TextBox>
+                                    <TextBox x:Name="tbWzrost" TextChanged="tbWzrost_TextChanged" FontWeight="Medium" TextAlignment="Right" PlaceholderText="cm" BorderBrush="#FF248CCE" Background="#FFEAEAEA" CornerRadius="10,10,10,10" Width="100" Height="35" Padding="0,6,10,0"></TextBox>
+                                </StackPanel>
+
+                                <!-- Stack z labelami -->
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10">
+                                    <TextBlock FontWeight="Medium" FontSize="15" Margin="5,5,50,5" Padding="10,0,5,0">Wiek</TextBlock>
+                                    <TextBlock FontWeight="Medium" FontSize="15" Margin="20,5,55,5">Waga</TextBlock>
+                                    <TextBlock FontWeight="Medium" FontSize="15" Margin="15,5,10,5">Wzrost</TextBlock>
+                                </StackPanel>
+
+                                <!-- Przerywnik -->
+                                <StackPanel Height="1" Background="Black" Margin="60,20,60,25"/>
+                                
+                                <!-- Button -->
+                                <Button x:Name="btnDalejDane" Click="btnDalejDane_Click" Tapped="btnDalejDane_Click" FontWeight="Medium"  Background="#FFEAEAEA" BorderBrush="#FF248CCE" CornerRadius="5,5,5,5" Width="90" HorizontalAlignment="center" Margin="0,20,0,40">
+                                    Dalej
+                                </Button>
+
+                            </StackPanel>
+
+                        </Border>
+                        
+                        
+                        <!-- Nagłówek -->
+                        <Border Background="#FFF9F9F9" CornerRadius="10,10,10,10" Padding="10,10,10,10" BorderThickness="0,0,0,3" BorderBrush="Black" Margin="0,0,0,0">
+                            <TextBlock Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" Margin="5,5,5,10">
+                                    Wpływ na wyliczenie kalorii
+                            </TextBlock>
+                        </Border>
+
+                        <!-- Opis formularza -->
+                        <StackPanel Background="#FFF9F9F9" HorizontalAlignment="Center" Padding="20,20,20,20" Margin="0,10,0,0">
+
+                            <TextBlock Foreground="#FF2A96BB" FontWeight="ExtraBold" Margin="0,15,5,5">Płeć</TextBlock>
+                            <TextBlock Foreground="Black" Width="350" TextWrapping="Wrap">
+                                Całkowita przemiana materii jest wyższa u mężczyzn niż u kobiet, różnice te 
+                                spowodowane są głównie innym składem ciała.
+                            </TextBlock>
+
+                            <!-- Przerywnik -->
+                            <StackPanel Height="1" Background="Black" Margin="0,30,0,30"/>
+
+
+                            <TextBlock Foreground="#FF2A96BB" FontWeight="ExtraBold" Margin="0,5,5,5">Wzrost i waga</TextBlock>
+                            <TextBlock Foreground="Black" Width="350" TextWrapping="Wrap">
+                                Wydatek energetyczny jest wyższy u osób z nadwagą i otyłością niż u osób szczupłych.
+                            </TextBlock>
+
+                            <!-- Przerywnik -->
+                            <StackPanel Height="1" Background="Black" Margin="0,30,0,30"/>
+
+                            <TextBlock Foreground="#FF2A96BB" FontWeight="ExtraBold" Margin="0,5,5,5">Wiek</TextBlock>
+                            <TextBlock Foreground="Black" Width="350" TextWrapping="Wrap" Margin="0,0,0,10">
+                                Tempo przemiany materii wraz z wiekiem spada, dlatego zapotrzebowanie kaloryczne u osób 
+                                starszych jest mniejsze.
+                            </TextBlock>
+                            
+                            
+                        </StackPanel>
+                        
+                        <!-- Stopka -->
+                        <Border Background="#FF2A96BB" CornerRadius="5,5,10,10" Padding="10,10,10,10" BorderThickness="0,3,0,0" BorderBrush="Black" Margin="0,10,0,0" Height="35">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">
+                            </TextBlock>
+                        </Border>
+
+                    </StackPanel>
+                </Border>
+                
+                <!-- ...................................................................................... -->
+                
+                <!-- Poziom aktywności fizycznej -->
+                <Border x:Name="borderAktywnosc" Visibility="Visible" CornerRadius="20,20,20,20" Width="480" BorderBrush="Black" BorderThickness="3,3,3,3" Background="#FFF9F9F9" Margin="30,10,30,10" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel>
+                        
+                        <!-- Nagłówek -->
+                        <Border Background="#FF2A96BB" CornerRadius="10,10,5,5" Padding="10,10,10,10" BorderThickness="0,0,0,3" BorderBrush="Black" Margin="0,0,0,5">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">
+                                Poziom aktywności fizycznej
+                            </TextBlock>
+                        </Border>
+                        
+                        <!-- Radiobuttons -->
+                        <Border Background="#FFF9F9F9" CornerRadius="10,10,5,5" Padding="10,10,10,10" BorderThickness="0,0,0,3" BorderBrush="Black" Margin="0,0,0,5">
+                            <StackPanel HorizontalAlignment="center" Width="400">
+                                <TextBlock Foreground="Black" FontWeight="Medium" FontSize="16" Margin="0,20,0,0" HorizontalAlignment="Center">
+                                    Wybierz swój poziom aktywności fizycznej:
+                                </TextBlock>
+                                <StackPanel Margin="70,20,0,0">
+                                    <RadioButton GroupName="aktywnosc" Checked="RadioButtonAktywnosc_Checked" Tapped="RadioButtonAktywnosc_Checked" Tag="znikoma" Margin="0,5,0,5">
+                                        <TextBlock FontWeight="Medium" FontSize="15">
+                                            Znikoma
+                                        </TextBlock>
+                                    </RadioButton>
+                                    <RadioButton GroupName="aktywnosc" Checked="RadioButtonAktywnosc_Checked" Tapped="RadioButtonAktywnosc_Checked" Tag="niska">
+                                        <TextBlock FontWeight="Medium" FontSize="15">
+                                            Niska
+                                        </TextBlock>
+                                    </RadioButton>
+                                    <RadioButton GroupName="aktywnosc" Checked="RadioButtonAktywnosc_Checked" Tapped="RadioButtonAktywnosc_Checked" Tag="umiarkowana" Margin="0,5,0,5">
+                                        <TextBlock FontWeight="Medium" FontSize="15">
+                                            Umiarkowana
+                                        </TextBlock>
+                                    </RadioButton>
+                                    <RadioButton GroupName="aktywnosc" Checked="RadioButtonAktywnosc_Checked" Tapped="RadioButtonAktywnosc_Checked" Tag="wysoka">
+                                        <TextBlock FontWeight="Medium" FontSize="15">
+                                            Wysoka
+                                        </TextBlock>
+                                    </RadioButton>
+                                    <RadioButton GroupName="aktywnosc" Checked="RadioButtonAktywnosc_Checked" Tapped="RadioButtonAktywnosc_Checked" Tag="bardzoWysoka" Margin="0,5,0,5">
+                                        <TextBlock FontWeight="Medium" FontSize="15">
+                                            Bardzo wysoka
+                                        </TextBlock>
+                                    </RadioButton>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="center" Margin="0,30,0,20">
+                                    <Button x:Name="btnWrocAktywnosc" Click="btnWrocAktywnosc_Click" Tapped="btnWrocAktywnosc_Click" Background="#FFEAEAEA" BorderBrush="#FF248CCE" CornerRadius="5,5,5,5" Width="90" HorizontalAlignment="center" FontWeight="Medium" Margin="0,0,10,0">Wróć</Button>
+                                    <Button x:Name="btnDalejAktywnosc" IsEnabled="False" Click="btnDalejAktywnosc_Click" Tapped="btnDalejAktywnosc_Click" Background="#FFEAEAEA" BorderBrush="#FF248CCE" CornerRadius="5,5,5,5" Width="90" HorizontalAlignment="center" FontWeight="Medium" Margin="10,0,0,0">Dalej</Button>
+                                </StackPanel>
+                            </StackPanel>
+
+                        </Border>
+
+                        <!-- Opis radiobuttonów -->
+                        <!-- Nagłówek -->
+                        <Border Background="#FFF9F9F9" CornerRadius="10,10,10,10" Padding="10,10,10,10" BorderThickness="0,0,0,3" BorderBrush="Black" Margin="0,0,0,0">
+                            <TextBlock Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" Margin="5,5,5,10">
+                                    Objaśnienie
+                            </TextBlock>
+                        </Border>
+
+                        <!-- Opis formularza -->
+                        <StackPanel Background="#FFF9F9F9" HorizontalAlignment="Center" Padding="20,20,20,20" Margin="0,10,0,0">
+
+                            <TextBlock Foreground="#FF2A96BB" FontWeight="ExtraBold" Margin="0,15,5,5">Znikoma</TextBlock>
+                            <TextBlock Foreground="Black" Width="350" TextWrapping="Wrap">
+                                Osoba, która z różnych przyczyn praktycznie nie rusza się w ciągu doby.
+                            </TextBlock>
+
+                            <!-- Przerywnik -->
+                            <StackPanel Height="1" Background="Black" Margin="0,30,0,30"/>
+
+
+                            <TextBlock Foreground="#FF2A96BB" FontWeight="ExtraBold" Margin="0,5,5,5">Niska</TextBlock>
+                            <TextBlock Foreground="Black" Width="350" TextWrapping="Wrap">
+                                Osoba, która nie trenuje i ma pracę siedzącą.
+                            </TextBlock>
+
+                            <!-- Przerywnik -->
+                            <StackPanel Height="1" Background="Black" Margin="0,30,0,30"/>
+
+                            <TextBlock Foreground="#FF2A96BB" FontWeight="ExtraBold" Margin="0,5,5,5">Umiarkowana</TextBlock>
+                            <TextBlock Foreground="Black" Width="350" TextWrapping="Wrap" Margin="0,0,0,10">
+                                Osoba, która ma pracę siedzącą i trenuje 2-3 razy w tygodniu lub nie trenuje, ale ma fizyczny lub intensywny charakter pracy.
+                            </TextBlock>
+
+                            <!-- Przerywnik -->
+                            <StackPanel Height="1" Background="Black" Margin="0,30,0,30"/>
+
+                            <TextBlock Foreground="#FF2A96BB" FontWeight="ExtraBold" Margin="0,5,5,5">Wysoka</TextBlock>
+                            <TextBlock Foreground="Black" Width="350" TextWrapping="Wrap" Margin="0,0,0,10">
+                                Osoba, która ma pracę fizyczną i dodatkowo trenuje 2-3 razy w tygodniu.
+                            </TextBlock>
+
+                            <!-- Przerywnik -->
+                            <StackPanel Height="1" Background="Black" Margin="0,30,0,30"/>
+
+                            <TextBlock Foreground="#FF2A96BB" FontWeight="ExtraBold" Margin="0,5,5,5">Bardzo wysoka</TextBlock>
+                            <TextBlock Foreground="Black" Width="350" TextWrapping="Wrap" Margin="0,0,0,10">
+                                Osoba, która w ciągu dnia dużo się rusza i oprócz tego intensywnie trenuje 2-4 razy w ciągu tygodnia.
+                            </TextBlock>
+
+
+                        </StackPanel>
+                        <!-- Stopka -->
+                        <Border Background="#FF2A96BB" CornerRadius="5,5,10,10" Padding="10,10,10,10" BorderThickness="0,3,0,0" BorderBrush="Black" Margin="0,10,0,0" Height="35">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">
+                            </TextBlock>
+                        </Border>
+
+                    </StackPanel>
+                </Border>
+
+                <!-- ...................................................................................... -->
+
+                <!-- Cel diety -->
+                <Border x:Name="borderCel" Visibility="Visible" CornerRadius="20,20,20,20" Width="480" BorderBrush="Black" BorderThickness="3,3,3,3" Background="#FFF9F9F9" Margin="30,10,30,10" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel>
+
+                        <!-- Nagłówek -->
+                        <Border Background="#FF2A96BB" CornerRadius="10,10,5,5" Padding="10,10,10,10" BorderThickness="0,0,0,3" BorderBrush="Black" Margin="0,0,0,5">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">
+                                Cel
+                            </TextBlock>
+                        </Border>
+
+                        <!-- Radiobuttons -->
+                        <Border Background="#FFF9F9F9" CornerRadius="10,10,5,5" Padding="10,10,10,10" BorderThickness="0,0,0,0" BorderBrush="Black" Margin="0,0,0,0">
+                            <StackPanel HorizontalAlignment="center" Width="400">
+                                <TextBlock Foreground="Black" FontWeight="Medium" FontSize="16" Margin="0,15,0,0" HorizontalAlignment="Center">
+                                    Wybierz swój cel:
+                                </TextBlock>
+                                <StackPanel Margin="70,20,0,0">
+                                    <RadioButton GroupName="cel" Checked="RadioButtonCel_Checked" Tapped="RadioButtonCel_Checked" Tag="schudnac" Margin="0,5,0,5">
+                                        <TextBlock FontWeight="Medium" FontSize="15">
+                                            Chcę schudnąć
+                                        </TextBlock>
+                                    </RadioButton>
+                                    <RadioButton GroupName="cel" Checked="RadioButtonCel_Checked" Tapped="RadioButtonCel_Checked" Tag="utrzymac" Margin="0,5,0,5">
+                                        <TextBlock FontWeight="Medium" FontSize="15">
+                                            Chcę utrzymać wagę
+                                        </TextBlock>
+                                    </RadioButton>
+                                    <RadioButton GroupName="cel" Checked="RadioButtonCel_Checked" Tapped="RadioButtonCel_Checked" Tag="przytyc" Margin="0,5,0,5">
+                                        <TextBlock FontWeight="Medium" FontSize="15">
+                                            Chcę przytyć
+                                        </TextBlock>
+                                    </RadioButton>
+                                </StackPanel>
+                                
+                                
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,20">
+                                    <Button x:Name="btnWrocCel" Click="btnWrocCel_Click" Tapped="btnWrocCel_Click" Background="#FFEAEAEA" BorderBrush="#FF248CCE" CornerRadius="5,5,5,5" Width="90" HorizontalAlignment="center" FontWeight="Medium" Margin="0,0,10,0">Wróć</Button>
+                                    <Button x:Name="btnObliczCel" IsEnabled="False" Click="btnObliczCel_Click" Tapped="btnObliczCel_Click" Background="#FFEAEAEA" BorderBrush="#FF248CCE" CornerRadius="5,5,5,5" Width="90" HorizontalAlignment="center" FontWeight="Medium" Margin="10,0,0,0">Oblicz</Button>
+                                </StackPanel>
+                            </StackPanel>
+
+                        </Border>
+
+                        <!-- Stopka -->
+                        <Border Background="#FF2A96BB" CornerRadius="5,5,10,10" Padding="10,10,10,10" BorderThickness="0,3,0,0" BorderBrush="Black" Margin="0,10,0,0" Height="35">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+
+                <!-- ...................................................................................... -->
+                
+                
+                <!-- Podsumowanie -->
+                <Border x:Name="borderPodsumowanie" Visibility="Visible" CornerRadius="20,20,20,20" Width="480" BorderBrush="Black" BorderThickness="3,3,3,3" Background="#FFF9F9F9" Margin="30,10,30,10" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel >
+
+                        <!-- Nagłówek -->
+                        <Border Background="#FF2A96BB" CornerRadius="10,10,5,5" Padding="10,10,10,10" BorderThickness="0,0,0,2" BorderBrush="Black" Margin="0,0,0,5">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">
+                                Zapotrzebowanie kaloryczne
+                            </TextBlock>
+                        </Border>
+
+                        <!-- Wyliczone dane -->
+                        <Border Background="#FFF9F9F9" CornerRadius="10,10,5,5" Padding="10,10,10,10" BorderThickness="0,0,0,0" BorderBrush="Black" Margin="0,0,0,5">
+                            <StackPanel Width="400">
+                                <TextBlock Foreground="Black" FontWeight="Medium" FontSize="18" Margin="0,15,0,0" HorizontalAlignment="Center">
+                                    Twoje zapotrzebowanie kaloryczne:
+                                </TextBlock>
+                                <Border BorderThickness="2,2,2,2" CornerRadius="10,10,10,10" BorderBrush="Black" Width="160" Height="50" Background="#FF2A96BB" Margin="0,25,0,30">
+                                    <TextBlock x:Name="tbWyliczoneKalorie" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" FontWeight="Medium" FontSize="20">
+                                        1000 kcal
+                                    </TextBlock>
+                                </Border>
+                                
+                                
+                                <!-- Przerywnik -->
+                                <StackPanel Height="1" Background="Black" Margin="0,10,0,40"/>
+                                
+                                <StackPanel Orientation="Horizontal">
+                                    
+                                    <!-- Makrosy labels -->
+                                    <StackPanel Margin="50,0,50,0">
+                                        <TextBlock FontWeight="Medium" FontSize="17" TextAlignment="Right" Margin="0,1,0,10">
+                                            Białka:
+                                        </TextBlock>
+                                        <TextBlock FontWeight="Medium" FontSize="17" TextAlignment="Right" Margin="0,28,0,10">
+                                            Tłuszcze:
+                                        </TextBlock>
+                                        <TextBlock FontWeight="Medium" FontSize="17" TextAlignment="Right" Margin="0,26,0,10">
+                                            Węglowodany:
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    <!-- Makrosy dane -->
+                                    <StackPanel Margin="0,0,0,30">
+                                        <Border BorderThickness="2,2,2,2" CornerRadius="10,10,10,10" BorderBrush="#FF248CCE" Width="80" Height="30" Background="#FFEAEAEA" Margin="0,0,0,15">
+                                            <TextBlock x:Name="tbWyliczoneBialka" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Medium">
+                                                100
+                                            </TextBlock>
+                                        </Border>
+                                        <Border BorderThickness="2,2,2,2" CornerRadius="10,10,10,10" BorderBrush="#FF248CCE" Width="80" Height="30" Background="#FFEAEAEA" Margin="0,15,0,15">
+                                            <TextBlock x:Name="tbWyliczoneTluszcze" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Medium">
+                                                100
+                                            </TextBlock>
+                                        </Border>
+
+                                        <Border BorderThickness="2,2,2,2" CornerRadius="10,10,10,10" BorderBrush="#FF248CCE" Width="80" Height="30" Background="#FFEAEAEA" Margin="0,15,0,15">
+                                            <TextBlock x:Name="tbWyliczoneWeglowodany" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Medium">
+                                                100 
+                                            </TextBlock>
+                                        </Border>
+
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Height="1" Background="Black" Margin="0,10,0,40"/>
+                                
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <Button x:Name="btnOdNowa" Click="btnOdNowa_Click" Tapped="btnOdNowa_Click" Background="#FFEAEAEA" BorderBrush="#FF248CCE" CornerRadius="5,5,5,5" Width="90" HorizontalAlignment="center" FontWeight="Medium">
+                                        Od nowa
+                                    </Button>
+                                    
+                                </StackPanel>
+                            </StackPanel>
+
+                        </Border>
+
+                        <Border Background="#FF2A96BB" CornerRadius="5,5,10,10" Padding="10,10,10,10" BorderThickness="0,3,0,0" BorderBrush="Black" Margin="0,10,0,0" Height="35">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+
+
+               
+
+                <!-- Niebieski stack z mięśniami -->
+                <Border BorderBrush="#FF55BAC7" CornerRadius="20,20,20,20" BorderThickness="3,3,3,3" Margin="10,10,10,10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Background="#FF99D5E0">
+
+                        <StackPanel Margin="40,5,20,5" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">TO NIE DIETA</TextBlock>
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">TO TWÓJ NOWY TRYB ŻYCIA</TextBlock>
+                        </StackPanel>
+                        <Image Width="70" Height="70" Source="ms-appx:///Assets/muscles.png" HorizontalAlignment="Left" Margin="40,0,30,0"></Image>
+                    </StackPanel>
+                </Border>
+
+
+            </StackPanel>
+        </ScrollViewer>
+
+        
+        <!-- Navigation Bar -->
+        <CommandBar Grid.Row="2" Background="#FFFFD662" HorizontalContentAlignment="Center" IsDynamicOverflowEnabled="False">
+            <CommandBar.Content>
+                <StackPanel Orientation="Horizontal" Padding="4,4,4,4">
+                    <AppBarButton Click="btnDoDomu_Click" Tapped="btnDoDomu_Click" Icon="Home" Label="Główna" Foreground="Black"></AppBarButton>
+                    <AppBarSeparator Width="5"/>
+                    <AppBarButton Click="btnDoDziennikaZywnosci_Click" Tapped="btnDoDziennikaZywnosci_Click" Icon="Add" Label="Dziennik żywności" Foreground="Black"></AppBarButton>
+                    <AppBarSeparator Width="5"/>
+                    <AppBarButton Click="btnDoKalendarzaDiety_Click" Tapped="btnDoKalendarzaDiety_Click" Icon="Calendar" Label="Kalendarz diety" Foreground="Black"></AppBarButton>
+                    <AppBarSeparator Width="5"/>
+                    <AppBarButton Click="btnDoZdjec_Click" Tapped="btnDoZdjec_Click" Icon="Camera" Label="Porównanie zdjęć" Foreground="Black"></AppBarButton>
+                    <AppBarSeparator Width="5"/>
+                    <AppBarButton Click="btnDoPogody_Click" Tapped="btnDoPogody_Click" Icon="World" Label="Pogoda" Foreground="Black"></AppBarButton>
+                    <AppBarSeparator Width="40"/>
+                    <AppBarButton Click="btnWyjscie_Click" Icon="Cancel" Label="Wyjście" Foreground="Red" FontWeight="Medium"></AppBarButton>
+                </StackPanel>
+
+            </CommandBar.Content>
+        </CommandBar>
+
+
+    </Grid>
+</Page>

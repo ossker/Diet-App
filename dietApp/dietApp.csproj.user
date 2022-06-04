@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Source>C:\Users\oskar\source\repos\dietApp\dietApp\Assets\LockScreenLogo.scale-200.png</Source>
+    <SmallTileSource>C:\Users\oskar\source\repos\dietApp\dietApp\Assets\LockScreenLogo.scale-200.png</SmallTileSource>
+    <MediumTileSource>C:\Users\oskar\source\repos\dietApp\dietApp\Assets\LockScreenLogo.scale-200.png</MediumTileSource>
+    <WideTileSource>C:\Users\oskar\source\repos\dietApp\dietApp\Assets\LockScreenLogo.scale-200.png</WideTileSource>
+    <LargeTileSource>C:\Users\oskar\source\repos\dietApp\dietApp\Assets\LockScreenLogo.scale-200.png</LargeTileSource>
+    <AppIconSource>C:\Users\oskar\source\repos\dietApp\dietApp\Assets\LockScreenLogo.scale-200.png</AppIconSource>
+    <SplashScreenSource>C:\Users\oskar\source\repos\dietApp\dietApp\Assets\LockScreenLogo.scale-200.png</SplashScreenSource>
+    <PackageLogoSource>C:\Users\oskar\source\repos\dietApp\dietApp\Assets\LockScreenLogo.scale-200.png</PackageLogoSource>
+    <BadgeLogoSource>C:\Users\oskar\source\repos\dietApp\dietApp\Assets\LockScreenLogo.scale-200.png</BadgeLogoSource>
+  </PropertyGroup>
+</Project>

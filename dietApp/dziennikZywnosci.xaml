@@ -1,0 +1,432 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:dietApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    x:Class="dietApp.dziennikZywnosci"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+
+        </Grid.RowDefinitions>
+
+        <!-- Górny napis -->
+        <Border Grid.Row="0" BorderBrush="#FFFFC700" CornerRadius="0,0,10,10" BorderThickness="2,2,2,2">
+            <StackPanel Background="#FFFFD662">
+                <TextBlock Text="Fit &amp; You" Foreground="white" Style="{ThemeResource HeaderTextBlockStyle}" 
+                           VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FocusVisualPrimaryBrush="White" />
+            </StackPanel>
+        </Border>
+
+
+        <!-- Content -->
+        <ScrollViewer Grid.Row="1" ZoomMode="Enabled" MaxZoomFactor="2" MinZoomFactor="1" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible">
+            <StackPanel>
+
+                <!-- Niebieski stack z nazwa strony -->
+                <Border BorderBrush="#FF55BAC7" Width="480" CornerRadius="20,20,20,20" BorderThickness="3,3,3,3" Margin="10,10,10,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Background="#FF99D5E0">
+                        <Image Width="70" Height="70" Source="ms-appx:///Assets/foodDiary.png" HorizontalAlignment="Left" Margin="40,5,30,5"></Image>
+                        <StackPanel Margin="30,5,30,5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">DZIENNIK ŻYWNOŚCI</TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+
+                <!-- ...................................................................................... -->
+                
+                <!-- Pozostale kalorie -->
+                <Border x:Name="borderPotrzebne" Visibility="Visible" CornerRadius="20,20,20,20" Width="480" BorderBrush="Black" BorderThickness="3,3,3,3" Background="#FFF9F9F9" Margin="30,10,30,10" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel>
+
+                        <!-- Nagłówek -->
+                        <Border Background="#FF2A96BB" CornerRadius="10,10,5,5" Padding="10,10,10,10" BorderThickness="0,0,0,2" BorderBrush="Black" Margin="0,0,0,5">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">
+                                Pozostałe zapotrzebowanie kaloryczne
+                            </TextBlock>
+                        </Border>
+
+                        <!-- Wyliczone dane -->
+                        <Border Background="#FFF9F9F9" CornerRadius="10,10,5,5" Padding="10,10,10,10" BorderThickness="0,0,0,0" BorderBrush="Black" Margin="0,0,0,5">
+                            <StackPanel Width="400">
+                                <TextBlock Foreground="Black" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Medium" FontSize="18" Margin="0,15,0,0" HorizontalAlignment="Center">
+                                    Aby wypełnić Twoje dzienne zapotrzebowanie kaloryczne potrzebujesz jeszcze:
+                                </TextBlock>
+                                <Border x:Name="borderPotrzebneKalorie"  BorderThickness="2,2,2,2" CornerRadius="10,10,10,10" BorderBrush="Black" Width="160" Height="50" Background="#FF2A96BB" Margin="0,25,0,30">
+                                    <TextBlock x:Name="tbPotrzebneKalorie" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Center" FontWeight="Medium" FontSize="20">
+                                        1000 kcal
+                                    </TextBlock>
+                                </Border>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,5">
+                                    <TextBlock x:Name="tbProgress" Text="{Binding ElementName=ProgressBar, Path=Value}" FontWeight="Medium" FontSize="20" />
+                                    <TextBlock FontWeight="Medium" FontSize="15" Margin="5,4.5,0,0">%</TextBlock>
+                                </StackPanel>
+                                
+                                <ProgressBar x:Name="ProgressBar" Value="0" Maximum="100" Height="20" BorderThickness="2,2,2,2" CornerRadius="10,10,10,10" BorderBrush="#FF248CCE" Background="#FFEAEAEA" Margin="0,0,0,20"/>
+
+                                <!-- Przerywnik -->
+                                <StackPanel Height="1" Background="Black" Margin="0,10,0,40"/>
+                                <StackPanel Orientation="Horizontal">
+                                    
+                                    
+                                    <!-- Makrosy labels -->
+                                    <StackPanel Margin="50,0,50,0">
+                                        <TextBlock FontWeight="Medium" FontSize="17" TextAlignment="Right" Margin="0,1,0,10">
+                                            Białka:
+                                        </TextBlock>
+                                        <TextBlock FontWeight="Medium" FontSize="17" TextAlignment="Right" Margin="0,28,0,10">
+                                            Tłuszcze:
+                                        </TextBlock>
+                                        <TextBlock FontWeight="Medium" FontSize="17" TextAlignment="Right" Margin="0,26,0,10">
+                                            Węglowodany:
+                                        </TextBlock>
+                                    </StackPanel>
+
+                                    
+                                    <!-- Makrosy dane -->
+                                    <StackPanel Margin="0,0,0,30">
+                                        <Border BorderThickness="2,2,2,2" CornerRadius="10,10,10,10" BorderBrush="#FF248CCE" Width="80" Height="30" Background="#FFEAEAEA" Margin="0,0,0,15">
+                                            <TextBlock x:Name="tbPotrzebneBialka" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Medium">
+                                                100 g
+                                            </TextBlock>
+                                        </Border>
+                                        <Border BorderThickness="2,2,2,2" CornerRadius="10,10,10,10" BorderBrush="#FF248CCE" Width="80" Height="30" Background="#FFEAEAEA" Margin="0,15,0,15">
+                                            <TextBlock x:Name="tbPotrzebneTluszcze" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Medium">
+                                                100 g
+                                            </TextBlock>
+                                        </Border>
+
+                                        <Border BorderThickness="2,2,2,2" CornerRadius="10,10,10,10" BorderBrush="#FF248CCE" Width="80" Height="30" Background="#FFEAEAEA" Margin="0,15,0,0">
+                                            <TextBlock x:Name="tbPotrzebneWeglowodany" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Medium">
+                                                100 g
+                                            </TextBlock>
+                                        </Border>
+
+                                    </StackPanel>
+                                </StackPanel>
+                               
+                            </StackPanel>
+
+                        </Border>
+
+                        <Border Background="#FF2A96BB" CornerRadius="5,5,10,10" Padding="10,10,10,10" BorderThickness="0,3,0,0" BorderBrush="Black" Margin="0,0,0,0" Height="35">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+
+                <!-- Dodaj posiłek -->
+                <Border x:Name="borderDodajPosilek" Visibility="Visible" CornerRadius="20,20,20,20" Width="480" BorderBrush="Black" BorderThickness="3,3,3,3" Background="#FFF9F9F9" Margin="30,10,30,10" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel>
+
+                        <!-- Nagłówek -->
+                        <Border Background="#FF2A96BB" CornerRadius="10,10,5,5" Padding="10,10,10,10" BorderThickness="0,0,0,2" BorderBrush="Black" Margin="0,0,0,5">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">
+                                    Dodaj posiłek
+                            </TextBlock>
+                        </Border>
+
+
+                        <!-- Wpisz posilek -->
+                        <Border Background="#FFF9F9F9" CornerRadius="10,10,10,10" Padding="10,10,10,10" BorderThickness="0,0,0,0" BorderBrush="Black" Margin="0,0,0,0">
+                            <StackPanel>
+                                <StackPanel>
+                                    <!-- Stack z wagą i wzrostem -->
+                                    <TextBox x:Name="tbNazwa" FontWeight="Medium" TextAlignment="Right" PlaceholderText="Wpisz posiłek" BorderBrush="#FF248CCE" Background="#FFEAEAEA" CornerRadius="10,10,10,10" Width="400" Height="35" Padding="0,6,10,0" Margin="0,5,0,20"></TextBox>
+
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBox x:Name="tbKalorie" TextChanged="tbKalorie_TextChanged" FontWeight="Medium" TextAlignment="Right" PlaceholderText="kcal" BorderBrush="#FF248CCE" Background="#FFEAEAEA" CornerRadius="10,10,10,10" Width="80" Height="35" Padding="0,6,10,0" Margin="0,0,25,0"></TextBox>
+                                        <TextBox x:Name="tbBialka" TextChanged="tbBialka_TextChanged" FontWeight="Medium" TextAlignment="Right" PlaceholderText="g" BorderBrush="#FF248CCE" Background="#FFEAEAEA" CornerRadius="10,10,10,10" Width="80" Height="35" Padding="0,6,10,0" Margin="0,0,25,0"></TextBox>
+                                        <TextBox x:Name="tbTluszcze" TextChanged="tbTluszcze_TextChanged" FontWeight="Medium" TextAlignment="Right" PlaceholderText="g" BorderBrush="#FF248CCE" Background="#FFEAEAEA" CornerRadius="10,10,10,10" Width="80" Height="35" Padding="0,6,10,0" Margin="0,0,25,0"></TextBox>
+                                        <TextBox x:Name="tbWeglowodany" TextChanged="tbWeglowodany_TextChanged" FontWeight="Medium" TextAlignment="Right" PlaceholderText="g" BorderBrush="#FF248CCE" Background="#FFEAEAEA" CornerRadius="10,10,10,10" Width="80" Height="35" Padding="0,6,10,0" Margin="0,0,0,0"></TextBox>
+                                    </StackPanel>
+
+                                    <!-- Stack z labelami -->
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,0,20">
+                                        <TextBlock FontWeight="Medium" FontSize="13" Margin="50,0,0,0">Kalorie</TextBlock>
+                                        <TextBlock FontWeight="Medium" FontSize="13" Margin="65,0,0,0">Białka</TextBlock>
+                                        <TextBlock FontWeight="Medium" FontSize="13" Margin="65,0,0,0">Tłuszcze</TextBlock>
+                                        <TextBlock FontWeight="Medium" FontSize="13" Margin="35,0,0,0">Węglowodany</TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+
+
+                                <StackPanel Orientation="Horizontal" Visibility="Visible" VerticalAlignment="center" HorizontalAlignment="center" Margin="0,10,0,10">
+                                    <!-- Button -->
+                                    <Button x:Name="btnDodajPosilek" Click="btnDodajPosilek_Click" Tapped="btnDodajPosilek_Click" HorizontalAlignment="center" FontWeight="Medium" Background="#FFEAEAEA" BorderBrush="#FF248CCE" CornerRadius="5,5,5,5" Width="110" Height="35" Margin="0,0,40,0">
+                                        Dodaj
+                                    </Button>
+                                    
+                                    <!-- ComboBox -->
+                                    <ComboBox x:Name="cbTypPosilku" AllowDrop="True" FontWeight="Medium" BorderBrush="#FF248CCE" Background="#FFEAEAEA" PlaceholderText="Posiłek" CornerRadius="10,10,10,10" VerticalAlignment="Center" FocusVisualPrimaryBrush="Black" Foreground="Black" Width="120" Height="35">
+                                        <ComboBoxItem Tag="S" Content="Śniadanie"/>
+                                        <ComboBoxItem Tag="O" Content="Obiad"/>
+                                        <ComboBoxItem Tag="K" Content="Kolacja"/>
+                                        <ComboBoxItem Tag="I" Content="Inne"/>
+                                    </ComboBox>
+                                    
+                                </StackPanel>
+                            </StackPanel>
+
+                        </Border>
+
+                        <!-- Stopka -->
+                        <Border Background="#FF2A96BB" CornerRadius="5,5,10,10" Padding="0,0,0,0" BorderThickness="0,3,0,0" BorderBrush="Black" Margin="0,0,0,0" Height="50">
+                            <Button x:Name="btnPomoc" Click="btnPomoc_Click"  HorizontalAlignment="Right" FontWeight="Medium" Background="#FFEAEAEA" BorderBrush="#FF248CCE" CornerRadius="9,9,9,9" Width="80" Height="35" Margin="0,0,15,0">
+                                Pomoc
+                            </Button>
+
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+
+
+                <!-- MOJE POSILKI -->
+                <Border CornerRadius="20,20,20,20" Width="480" BorderThickness="3,3,3,3" BorderBrush="Black" Background="#FF2A96BB" Margin="20,40,20,0">
+                    <TextBlock  TextAlignment="Center" TextWrapping="Wrap" Margin="10,10,10,10" Foreground="White" FontWeight="Bold" FontSize="20">
+                                MOJE POSIŁKI
+                    </TextBlock>
+                </Border>
+
+                <!-- ...................................................................................... -->
+                
+                <!-- Śniadanie -->
+                <Border x:Name="borderSniadanie" Visibility="Visible" CornerRadius="20,20,20,20" Width="480" BorderBrush="Black" BorderThickness="3,3,3,3" Background="#FFF9F9F9" Margin="30,10,30,10" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel>
+
+                        <!-- Nagłówek -->
+                        <Border Background="#FF2A96BB" CornerRadius="10,10,5,5" Padding="10,10,10,10" BorderThickness="0,0,0,2" BorderBrush="Black" Margin="0,0,0,5">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">
+                                    Śniadanie
+                            </TextBlock>
+                        </Border>
+
+                        
+                        <Border Background="#FFF9F9F9" CornerRadius="10,10,15,15" Padding="10,10,10,10" BorderThickness="0,0,0,0" BorderBrush="Black" Margin="0,0,0,5">
+                            <StackPanel>
+
+                                <!-- Data grid -->
+                                <Custom:DataGrid x:Name="dataGridSniadanie" Margin="5,5,5,5" HorizontalScrollBarVisibility="Hidden" Foreground="Black" FontWeight="Medium"/>
+
+                                <!-- Przerywnik -->
+                                <StackPanel Height="1" Background="Black" Margin="230,10,20,0"/>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,0,10">
+
+                                    <TextBlock Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" Margin="0,0,30,0">
+                                    Razem kalorii:
+                                    </TextBlock>
+                                    <TextBlock x:Name="tbSniadanieKalorie" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" Margin="0,0,30,0">
+                                    1000
+                                    </TextBlock>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </Border>
+
+
+                        <!-- Stopka -->
+                        <Border Background="#FF2A96BB" CornerRadius="5,5,10,10" Padding="10,10,10,10" BorderThickness="0,3,0,0" BorderBrush="Black" Margin="0,0,0,0" Height="35">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ...................................................................................... -->
+                
+                <!-- Obiad -->
+                <Border x:Name="borderObiad" Visibility="Visible" CornerRadius="20,20,20,20" Width="480" BorderBrush="Black" BorderThickness="3,3,3,3" Background="#FFF9F9F9" Margin="30,10,30,10" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel>
+
+                        <!-- Nagłówek -->
+                        <Border Background="#FF2A96BB" CornerRadius="10,10,5,5" Padding="10,10,10,10" BorderThickness="0,0,0,2" BorderBrush="Black" Margin="0,0,0,5">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">
+                                    Obiad
+                            </TextBlock>
+                        </Border>
+
+                        
+                        <Border Background="#FFF9F9F9" CornerRadius="10,10,15,15" Padding="10,10,10,10" BorderThickness="0,0,0,0" BorderBrush="Black" Margin="0,0,0,5">
+                            <StackPanel>
+
+                                <!-- Data grid -->
+                                <Custom:DataGrid x:Name="dataGridObiad" Margin="5,5,5,5" HorizontalScrollBarVisibility="Hidden" Foreground="Black" FontWeight="Medium"/>
+
+                                <!-- Przerywnik -->
+                                <StackPanel Height="1" Background="Black" Margin="230,10,20,0"/>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,0,10">
+
+                                    <TextBlock Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" Margin="0,0,30,0">
+                                        Razem kalorii:
+                                    </TextBlock>
+                                    <TextBlock x:Name="tbObiadKalorie"  Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" Margin="0,0,30,0">
+                                        1000
+                                    </TextBlock>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </Border>
+
+
+                        
+                        <!-- Stopka -->
+                        <Border Background="#FF2A96BB" CornerRadius="5,5,10,10" Padding="10,10,10,10" BorderThickness="0,3,0,0" BorderBrush="Black" Margin="0,0,0,0" Height="35">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ...................................................................................... -->
+                <!-- Kolacja -->
+
+                <Border x:Name="borderKolacja" Visibility="Visible" CornerRadius="20,20,20,20" Width="480" BorderBrush="Black" BorderThickness="3,3,3,3" Background="#FFF9F9F9" Margin="30,10,30,10" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel>
+
+                        <!-- Nagłówek -->
+                        <Border Background="#FF2A96BB" CornerRadius="10,10,5,5" Padding="10,10,10,10" BorderThickness="0,0,0,2" BorderBrush="Black" Margin="0,0,0,5">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">
+                                    Kolacja
+                            </TextBlock>
+                        </Border>
+
+                        
+                        <Border Background="#FFF9F9F9" CornerRadius="10,10,15,15" Padding="10,10,10,10" BorderThickness="0,0,0,0" BorderBrush="Black" Margin="0,0,0,5">
+                            <StackPanel>
+
+                                <!-- Data grid -->
+                                <Custom:DataGrid x:Name="dataGridKolacja" Margin="5,5,5,5" HorizontalScrollBarVisibility="Hidden" Foreground="Black" FontWeight="Medium"/>
+
+                                <!-- Przerywnik -->
+                                <StackPanel Height="1" Background="Black" Margin="230,10,20,0"/>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,0,10">
+
+                                    <TextBlock Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" Margin="0,0,30,0">
+                                    Razem kalorii:
+                                    </TextBlock>
+                                    <TextBlock x:Name="tbKolacjaKalorie" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" Margin="0,0,30,0">
+                                    1000
+                                    </TextBlock>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </Border>
+
+
+                        <!-- Stopka -->
+                        <Border Background="#FF2A96BB" CornerRadius="5,5,10,10" Padding="10,10,10,10" BorderThickness="0,3,0,0" BorderBrush="Black" Margin="0,0,0,0" Height="35">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+
+                <!-- ...................................................................................... -->
+                <!-- Inne -->
+
+                <Border x:Name="borderInne" Visibility="Visible" CornerRadius="20,20,20,20" Width="480" BorderBrush="Black" BorderThickness="3,3,3,3" Background="#FFF9F9F9" Margin="30,10,30,10" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel>
+
+                        <!-- Nagłówek -->
+                        <Border Background="#FF2A96BB" CornerRadius="10,10,5,5" Padding="10,10,10,10" BorderThickness="0,0,0,2" BorderBrush="Black" Margin="0,0,0,5">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18">
+                                    Inne
+                            </TextBlock>
+                        </Border>
+
+                        
+                        <Border Background="#FFF9F9F9" CornerRadius="10,10,15,15" Padding="10,10,10,10" BorderThickness="0,0,0,0" BorderBrush="Black" Margin="0,0,0,5">
+                            <StackPanel>
+
+                                <!-- Data grid -->
+                                <Custom:DataGrid x:Name="dataGridInne" Margin="5,5,5,5" HorizontalScrollBarVisibility="Hidden" Foreground="Black" FontWeight="Medium"/>
+
+                                <!-- Przerywnik -->
+                                <StackPanel Height="1" Background="Black" Margin="230,10,20,0"/>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,0,10">
+
+                                    <TextBlock Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" Margin="0,0,30,0">
+                                    Razem kalorii:
+                                    </TextBlock>
+                                    <TextBlock x:Name="tbInneKalorie" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="17" Margin="0,0,30,0">
+                                    1000
+                                    </TextBlock>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </Border>
+
+
+                        
+                        <!-- Stopka -->
+                        <Border Background="#FF2A96BB" CornerRadius="5,5,10,10" Padding="10,10,10,10" BorderThickness="0,3,0,0" BorderBrush="Black" Margin="0,0,0,0" Height="35">
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">
+                            </TextBlock>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ...................................................................................... -->
+
+                <!-- Niebieski stack z mięśniami -->
+                <Border BorderBrush="#FF55BAC7" CornerRadius="20,20,20,20" BorderThickness="3,3,3,3" Margin="10,10,10,10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Background="#FF99D5E0">
+
+                        <StackPanel Margin="40,5,20,5" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">TO NIE DIETA</TextBlock>
+                            <TextBlock Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">TO TWÓJ NOWY TRYB ŻYCIA</TextBlock>
+                        </StackPanel>
+                        <Image Width="70" Height="70" Source="ms-appx:///Assets/muscles.png" HorizontalAlignment="Left" Margin="40,0,30,0"></Image>
+                    </StackPanel>
+                </Border>
+
+
+            </StackPanel>
+        </ScrollViewer>
+
+
+        <!-- Navigation Bar -->
+        <CommandBar Grid.Row="2" Background="#FFFFD662" HorizontalContentAlignment="Center" IsDynamicOverflowEnabled="False">
+            <CommandBar.Content>
+                <StackPanel Orientation="Horizontal" Padding="4,4,4,4">
+                    <AppBarButton Click="btnDoDomu_Click" Tapped="btnDoDomu_Click" Icon="Home" Label="Główna" Foreground="Black"></AppBarButton>
+                    <AppBarSeparator Width="5"/>
+                    <AppBarButton Click="btnDoKalkulatoraKalorii_Click" Tapped="btnDoKalkulatoraKalorii_Click" Icon="Calculator" Label="Kalkulator kalorii" Foreground="Black"></AppBarButton>
+                    <AppBarSeparator Width="5"/>
+                    <AppBarButton Click="btnDoKalendarzaDiety_Click" Tapped="btnDoKalendarzaDiety_Click" Icon="Calendar" Label="Kalendarz diety" Foreground="Black"></AppBarButton>
+                    <AppBarSeparator Width="5"/>
+                    <AppBarButton Click="btnDoZdjec_Click" Tapped="btnDoZdjec_Click" Icon = "Camera" Label = "Porównanie zdjęć" Foreground = "Black" ></AppBarButton>
+                    <AppBarSeparator Width="5"/>
+                    <AppBarButton Click="btnDoPogody_Click" Tapped="btnDoPogody_Click" Icon="World" Label="Pogoda" Foreground="Black"></AppBarButton>
+                    <AppBarSeparator Width="40"/>
+                    <AppBarButton Click="btnWyjscie_Click" Icon="Cancel" Label="Wyjście" Foreground="Red" FontWeight="Medium"></AppBarButton>
+                </StackPanel>
+
+            </CommandBar.Content>
+        </CommandBar>
+
+
+    </Grid>
+</Page>
